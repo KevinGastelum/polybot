@@ -2,7 +2,7 @@
 
 **用于在 Google Antigravity 上构建自主 AI 代理的生产级入门套件。**
 
-语言: [English](/docs/en/) | [中文](README_CN.md) | [Español](/docs/es/)
+语言: [English](/docs/en/) | [中文（仓库主页）](README_CN.md) | [中文文档](/docs/zh/) | [Español](/docs/es/)
 
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Gemini](https://img.shields.io/badge/AI-Gemini_2.0_Flash-blue)
@@ -207,6 +207,13 @@ Swarm 会自动：
 - 🚀 阶段 9：企业核心（进行中）
 
 详见 [Roadmap](docs/en/ROADMAP.md)。
+
+## 🆕 最近更新
+
+- 支持本地 OpenAI 兼容后端（如 Ollama），在没有 Google Key 时可直接用本地模型。
+- 修复 `.env` 读取路径，从 `src/` 运行也能读取项目根目录配置。
+- 默认 `.env` 改为本地后端占位，不再硬编码 Google Key。
+- 入口脚本（`agent.py`、`src/agent.py`）支持通过参数或 `AGENT_TASK` 指定任务，不再固定示例任务。
 
 ## 🤝 贡献
 

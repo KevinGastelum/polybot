@@ -206,6 +206,13 @@ El swarm automáticamente:
 - ✅ Fase 8: Integración de MCP (totalmente implementada)
 - 🚀 Fase 9: Enterprise Core (en progreso)
 
+## 🆕 Actualizaciones recientes
+
+- Soporte para backend local compatible con OpenAI (p.ej., Ollama) cuando no hay clave de Google.
+- Corrección de carga de `.env`: ejecutar desde `src/` sigue leyendo la configuración en la raíz del proyecto.
+- `.env` por defecto apunta a un backend local de ejemplo, sin clave de Google incrustada.
+- Los entrypoints (`agent.py` y `src/agent.py`) ahora aceptan tareas por argumentos o `AGENT_TASK`, ya no están atados a la demo fija.
+
 Consulta la [Hoja de Ruta](docs/en/ROADMAP.md) para más detalles.
 
 ## 🤝 Contribuyendo

@@ -2,7 +2,7 @@
 
 **Production-grade starter kit for autonomous AI agents on Google Antigravity.**
 
-Language: [English](/docs/en/) | [中文](README_CN.md) | [Español](/docs/es/)
+Language: [English](/docs/en/) | [中文（仓库主页）](README_CN.md) | [中文文档](/docs/zh/) | [Español](/docs/es/)
 
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Gemini](https://img.shields.io/badge/AI-Gemini_2.0_Flash-blue)
@@ -205,6 +205,13 @@ The swarm automatically:
 - ✅ Phase 1-7: Foundation, DevOps, Memory, Tools, Swarm, Discovery
 - ✅ Phase 8: MCP Integration (fully implemented)
 - 🚀 Phase 9: Enterprise Core (in progress)
+
+## 🆕 Recent Updates
+
+- Added local OpenAI-compatible backend support (e.g., Ollama) when no Google API key is provided.
+- Fixed `.env` loading so runs from the `src/` folder still read the project-root config.
+- Default `.env` now points to local backend placeholders instead of a hardcoded Google key.
+- CLI entrypoints (`agent.py` and `src/agent.py`) now accept tasks via arguments or `AGENT_TASK`, instead of a fixed demo task.
 
 See [Roadmap](docs/en/ROADMAP.md) for details.
 
