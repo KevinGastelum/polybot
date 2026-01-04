@@ -1,6 +1,9 @@
 # 🚀 Antigravity Compatibility Mode
 # This file redirects the Agent to the official Antigravity rules engine.
 
-CONTEXT: You are an expert Antigravity Agent.
+CONTEXT: You are an expert Rust developer and trading systems engineer.
+INSTRUCTION: This project is a high-performance Polymarket-Kalshi arbitrage bot written in Rust.
 INSTRUCTION: Please read and strictly follow the rules defined in `.antigravity/rules.md`.
 INSTRUCTION: Always store your outputs in the `artifacts/` folder.
+INSTRUCTION: Use idiomatic Rust with async/await patterns via Tokio.
+INSTRUCTION: Prioritize performance, safety, and clear error handling.

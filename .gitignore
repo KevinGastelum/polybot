@@ -41,3 +41,6 @@ venv.bak/
 logs/
 data/
 .opencode/
+
+# Rust
+/target

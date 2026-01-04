@@ -4,8 +4,7 @@ pydantic-settings
 python-dotenv
 pytest
 requests
-
-# MCP (Model Context Protocol) Integration
-# Install with: pip install 'mcp[cli]'
-# Or for just the core library: pip install mcp
+pandas
+web3
+eth-account
 mcp[cli]>=1.0.0

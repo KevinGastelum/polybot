@@ -1,242 +1,144 @@
-# 🪐 Google Antigravity Workspace Template
+# 🤖 Polymarket-Kalshi Arbitrage Bot
 
-**Production-grade starter kit for autonomous AI agents on Google Antigravity.**
-
-Language: [English](/docs/en/) | [中文（仓库主页）](README_CN.md) | [中文文档](/docs/zh/) | [Español](/docs/es/)
+**High-performance, production-ready arbitrage trading system written in Rust.**
 
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Gemini](https://img.shields.io/badge/AI-Gemini_2.0_Flash-blue)
-![Architecture](https://img.shields.io/badge/Architecture-Event_Driven-purple)
-![Memory](https://img.shields.io/badge/Context-Infinite-orange)
+![Rust](https://img.shields.io/badge/Rust-1.75+-orange)
+![Architecture](https://img.shields.io/badge/Architecture-Async_Tokio-purple)
+![Status](https://img.shields.io/badge/Status-In_Development-blue)
 
-## 🌟 Project Intent
+## 🌟 Overview
 
-In a world full of AI IDEs, I want enterprise-grade architecture to be as simple as **Clone → Rename → Prompt**.
+This bot monitors price discrepancies between **Polymarket** (Polygon-based prediction market) and **Kalshi** (US-regulated prediction market), executing risk-free arbitrage opportunities in real-time with sub-millisecond latency.
 
-This project leverages IDE context awareness (via `.cursorrules` and `.antigravity/rules.md`) to pre-embed a complete **cognitive architecture** in the repo.
+### How Arbitrage Works
 
-When you open this project, your IDE stops being just an editor—it becomes an **industry-savvy architect**.
+When the combined cost of opposing positions on the same event is less than $1.00, a risk-free profit opportunity exists:
 
-**First principles:**
+| Platform | Position | Price |
+|----------|----------|-------|
+| Polymarket | YES | $0.42 |
+| Kalshi | NO | $0.55 |
+| **Total** | | **$0.97** |
+| **Profit** | | **$0.03 (3.09%)** |
 
-- Minimize repetition: the repo should encode defaults so setup is nearly zero.
-- Make intent explicit: capture architecture, context, and workflows in files, not tribal knowledge.
-- Treat the IDE as a teammate: contextual rules turn the editor into a proactive architect, not a passive tool.
+At market expiry, one side always pays out $1.00, guaranteeing profit.
 
-### Why do we need a thinking scaffold?
-
-While building with Google Antigravity or Cursor, I found a pain point:
-
-**The IDE and models are powerful, but the empty project is too weak.**
-
-Every new project repeats the same boring setup:
-
-- "Should my code live in `src` or `app`?"
-- "How do I define utilities so Gemini recognizes them?"
-- "How do I help the AI remember prior context?"
-
-This repetition wastes creative energy. My ideal workflow is: **after a git clone, the IDE already knows what to do.**
-
-So I built this project: **Antigravity Workspace Template**.
-
-## ⚡ Quick Start
-
-### Automated Installation (Recommended)
-
-**Linux / macOS:**
-```bash
-# 1. Clone the template
-git clone https://github.com/study8677/antigravity-workspace-template.git my-project
-cd my-project
-
-# 2. Run the installer
-chmod +x install.sh
-./install.sh
-
-# 3. Configure your API keys
-nano .env
-
-# 4. Run the agent
-source venv/bin/activate
-python src/agent.py
-```
-
-**Windows:**
-```cmd
-# 1. Clone the template
-git clone https://github.com/study8677/antigravity-workspace-template.git my-project
-cd my-project
-
-# 2. Run the installer
-install.bat
-
-# 3. Configure your API keys (notepad .env)
-
-# 4. Run the agent
-python src/agent.py
-```
-
-### Manual Installation
-
-```bash
-# 1. Clone the template
-git clone https://github.com/study8677/antigravity-workspace-template.git my-project
-cd my-project
-
-# 2. Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Configure your API keys
-cp .env.example .env  # (if available) or create .env manually
-nano .env
-
-# 5. Run the agent
-python src/agent.py
-```
-
-**That's it!** The IDE auto-loads configuration via `.cursorrules` + `.antigravity/rules.md`. You're ready to prompt.
-
-## 🎯 What Is This?
-
-This is **not** another LangChain wrapper. It's a minimal, transparent workspace for building AI agents that:
-
-- 🧠 Have infinite memory (recursive summarization)
-- 🛠️ Auto-discover tools from `src/tools/`
-- 📚 Auto-inject context from `.context/`
-- 🔌 Connect to MCP servers seamlessly
-- 🤖 Coordinate multiple specialist agents
-- 📦 Save outputs as artifacts (plans, logs, evidence)
-
-**Clone → Rename → Prompt. That's the workflow.**
-
-## 🚀 Key Features
+## 🚀 Features
 
 | Feature | Description |
 |---------|-------------|
-| 🧠 **Infinite Memory** | Recursive summarization compresses context automatically |
-| 🛠️ **Universal Tools** | Drop Python functions in `src/tools/` → auto-discovered |
-| 📚 **Auto Context** | Add files to `.context/` → auto-injected into prompts |
-| 🔌 **MCP Support** | Connect GitHub, databases, filesystems, custom servers |
-| 🤖 **Swarm Agents** | Multi-agent orchestration with Router-Worker pattern |
-| ⚡ **Gemini Native** | Optimized for Gemini 2.0 Flash |
-| 🌐 **LLM Agnostic** | Use OpenAI, Azure, Ollama, or any OpenAI-compatible API |
-| 📂 **Artifact-First** | Every task produces plans, logs, and evidence |
+| ⚡ **High Performance** | Written in Rust with async/await for maximum speed |
+| 🔌 **WebSocket Feeds** | Real-time price updates from both platforms |
+| 🧮 **SIMD Detection** | Vectorized arbitrage calculations |
+| 🔒 **Circuit Breakers** | Automatic safety mechanisms to prevent losses |
+| 📊 **Position Tracking** | Real-time P&L monitoring |
+| 🔐 **Secure** | Private keys never leave your machine |
 
-## 📚 Documentation
-
-**Full documentation available in `/docs/en/`:**
-
-- **[Quick Start](docs/en/QUICK_START.md)** — Installation & deployment
-- **[Philosophy](docs/en/PHILOSOPHY.md)** — Core concepts & architecture
-- **[Zero-Config](docs/en/ZERO_CONFIG.md)** — Auto tool & context loading
-- **[MCP Integration](docs/en/MCP_INTEGRATION.md)** — External tool connectivity
-- **[Swarm Protocol](docs/en/SWARM_PROTOCOL.md)** — Multi-agent coordination
-- **[Roadmap](docs/en/ROADMAP.md)** — Future phases & vision
-
-## 🏗️ Project Structure
+## 📦 Project Structure
 
 ```
 src/
-├── agent.py           # Main agent loop
-├── memory.py          # JSON memory manager
-├── mcp_client.py      # MCP integration
-├── swarm.py           # Multi-agent orchestration
-├── agents/            # Specialist agents
-└── tools/             # Your custom tools
+├── main.rs              # Entry point
+├── config.rs            # Configuration loader
+├── polymarket/          # Polymarket client & CLOB
+├── kalshi/              # Kalshi client
+├── arbitrage/           # Core detection & execution logic
+├── types.rs             # Shared data structures
+└── utils/               # Helpers (circuit breaker, cache, etc.)
 
-.context/             # Knowledge base (auto-injected)
-.antigravity/         # Antigravity rules
-artifacts/            # Outputs & evidence
+.env                     # API keys (never commit!)
+Cargo.toml               # Rust dependencies
 ```
 
-## 💡 Example: Build a Tool in 30 Seconds
+## ⚡ Quick Start
 
-```python
-# src/tools/my_tool.py
-def analyze_sentiment(text: str) -> str:
-    """Analyzes the sentiment of given text."""
-    return "positive" if len(text) > 10 else "neutral"
+### Prerequisites
+
+1. **Rust** (1.75+): Install via [rustup](https://rustup.rs/)
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+
+2. **API Keys**:
+   - Polymarket: API Key, Secret, Passphrase, Private Key
+   - Kalshi: Email/Password or API Key/Secret
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/polymarket-kalshi-arbitrage-bot.git
+cd polymarket-kalshi-arbitrage-bot
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your API keys
+
+# Build in release mode (optimized)
+cargo build --release
+
+# Run the bot
+cargo run --release
 ```
 
-**Restart agent.** Done! The tool is now available.
+### Dry Run Mode
 
-## 🔌 MCP Integration
-
-Connect to external tools:
-
-```json
-{
-  "servers": [
-    {
-      "name": "github",
-      "transport": "stdio",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "enabled": true
-    }
-  ]
-}
+To test without executing real trades:
+```bash
+DRY_RUN=true cargo run --release
 ```
 
-Agent automatically discovers and uses all MCP tools.
+## 🔧 Configuration
 
-## 🤖 Multi-Agent Swarm
+Edit `.env` to configure the bot:
 
-Decompose complex tasks:
+```env
+# Polymarket
+POLYMARKET_API_KEY=your_api_key
+POLYMARKET_SECRET=your_secret
+POLYMARKET_PASSPHRASE=your_passphrase
+POLYMARKET_PRIVATE_KEY=your_wallet_private_key
+POLYGON_RPC_URL=https://polygon-rpc.com
 
-```python
-from src.swarm import SwarmOrchestrator
+# Kalshi
+KALSHI_EMAIL=your_email
+KALSHI_PASSWORD=your_password
 
-swarm = SwarmOrchestrator()
-result = swarm.execute("Build and review a calculator")
+# Bot Settings
+MIN_PROFIT_THRESHOLD=0.02  # 2% minimum profit
+MAX_POSITION_SIZE=100      # Max $100 per trade
+DRY_RUN=false
+LOG_LEVEL=INFO
 ```
 
-The swarm automatically:
-- 📤 Routes to Coder, Reviewer, Researcher agents
-- 🧩 Synthesizes results
-- 📂 Saves artifacts
+## 🏗️ Architecture
 
-## ✅ What's Complete
+```mermaid
+graph TD
+    A[WebSocket Feeds] --> B[Price Aggregator]
+    B --> C[Arbitrage Detector]
+    C --> D{Opportunity Found?}
+    D -->|Yes| E[Risk Manager]
+    E --> F[Order Executor]
+    F --> G[Polymarket CLOB]
+    F --> H[Kalshi API]
+    D -->|No| B
+```
 
-- ✅ Phase 1-7: Foundation, DevOps, Memory, Tools, Swarm, Discovery
-- ✅ Phase 8: MCP Integration (fully implemented)
-- 🚀 Phase 9: Enterprise Core (in progress)
+## ⚠️ Disclaimer
 
-## 🆕 Recent Updates
+> **IMPORTANT**: This bot executes real trades with real money. Use at your own risk.
+>
+> - Never share your API keys or private keys.
+> - Start with small position sizes.
+> - Monitor the bot closely during initial runs.
+> - Ensure you comply with all applicable laws and platform terms of service.
 
-- Added local OpenAI-compatible backend support (e.g., Ollama) when no Google API key is provided.
-- Fixed `.env` loading so runs from the `src/` folder still read the project-root config.
-- Default `.env` now points to local backend placeholders instead of a hardcoded Google key.
-- CLI entrypoints (`agent.py` and `src/agent.py`) now accept tasks via arguments or `AGENT_TASK`, instead of a fixed demo task.
-
-See [Roadmap](docs/en/ROADMAP.md) for details.
-
-## 🤝 Contributing
-
-Ideas are contributions too! Open an [issue](https://github.com/study8677/antigravity-workspace-template/issues) to:
-- Report bugs
-- Suggest features
-- Propose architecture (Phase 9)
-
-Or submit a PR to improve docs or code.
-
-## 👥 Contributors
-
-- [@devalexanderdaza](https://github.com/devalexanderdaza) — First contributor. Implemented demo tools, enhanced agent functionality, proposed the "Agent OS" roadmap, and completed MCP integration.
-- [@Subham-KRLX](https://github.com/Subham-KRLX) — Added dynamic tools and context loading (Fixes #4) and the multi-agent cluster protocol (Fixes #6).
-
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=study8677/antigravity-workspace-template&type=Date)](https://star-history.com/#study8677/antigravity-workspace-template&Date)
-
-## 📄 License
+## 📝 License
 
 MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**[Explore Full Documentation →](docs/en/)**
+**Built with ❤️ and Rust**
