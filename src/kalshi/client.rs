@@ -166,14 +166,22 @@ impl KalshiClient {
             .await
             .context("Failed to fetch market")?;
 
+        let status = response.status();
+        let text = response.text().await
+            .context("Failed to read market response body")?;
+        
+        debug!("Kalshi market response ({}): {}", status, &text[..text.len().min(500)]);
+
+        if !status.is_success() {
+            anyhow::bail!("Kalshi market request failed: {}", text);
+        }
+
         #[derive(Deserialize)]
         struct MarketResponse {
             market: KalshiMarket,
         }
 
-        let market_resp: MarketResponse = response
-            .json()
-            .await
+        let market_resp: MarketResponse = serde_json::from_str(&text)
             .context("Failed to parse market response")?;
 
         Ok(market_resp.market)

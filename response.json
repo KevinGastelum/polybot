@@ -1,0 +1,72 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 3.128.40.22:443...
+* Connected to trading-api.kalshi.com (3.128.40.22) port 443 (#0)
+* ALPN: offers h2
+* ALPN: offers http/1.1
+*  CAfile: C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+*  CApath: none
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [3799 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=*.kalshi.com
+*  start date: Feb  4 00:00:00 2025 GMT
+*  expire date: Mar  5 23:59:59 2026 GMT
+*  subjectAltName: host "trading-api.kalshi.com" matched cert's "*.kalshi.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M03
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+} [5 bytes data]
+* h2h3 [:method: POST]
+* h2h3 [:path: /trade-api/v2/login]
+* h2h3 [:scheme: https]
+* h2h3 [:authority: trading-api.kalshi.com]
+* h2h3 [user-agent: curl/7.85.0]
+* h2h3 [accept: */*]
+* h2h3 [content-type: application/json]
+* h2h3 [content-length: 29]
+* Using Stream ID: 1 (easy handle 0x2ce7c9622f0)
+} [5 bytes data]
+> POST /trade-api/v2/login HTTP/2
+> Host: trading-api.kalshi.com
+> user-agent: curl/7.85.0
+> accept: */*
+> content-type: application/json
+> content-length: 29
+> 
+} [5 bytes data]
+* We are completely uploaded and fine
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [157 bytes data]
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+} [5 bytes data]
+< HTTP/2 401 
+< server: awselb/2.0
+< date: Sun, 04 Jan 2026 13:47:56 GMT
+< content-type: text/plain; charset=utf-8
+< content-length: 96
+< 
+{ [96 bytes data]
+100   125  100    96  100    29    447    135 --:--:-- --:--:-- --:--:--   586API has been moved to https://api.elections.kalshi.com/
+Please check our docs on how to migrate.
+* Connection #0 to host trading-api.kalshi.com left intact
