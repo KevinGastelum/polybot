@@ -11,3 +11,5 @@ pub mod arbitrage;
 pub mod utils;
 pub mod strategies;
 pub mod analysis;
+pub mod paper_trading;
+pub mod tui;
