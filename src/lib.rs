@@ -9,3 +9,5 @@ pub mod polymarket;
 pub mod kalshi;
 pub mod arbitrage;
 pub mod utils;
+pub mod strategies;
+pub mod analysis;

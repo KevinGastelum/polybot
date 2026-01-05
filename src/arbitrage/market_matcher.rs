@@ -1,10 +1,12 @@
 //! Market matching module.
 //!
 //! Maps equivalent markets between Polymarket and Kalshi.
-//! 
-//! IMPORTANT: Polymarket uses $2,000 increments (e.g., $94k, $96k, $98k)
-//! while Kalshi uses $250-$500 increments (e.g., $97,750, $98,250, $98,750).
-//! This means exact arbitrage is not possible, but we can compare nearby thresholds.
+//!
+//! Note: Polymarket and Kalshi have different market structures:
+//! - Polymarket: "Bitcoin Up or Down" hourly markets (50/50 binary)
+//! - Kalshi: "Bitcoin above $X" threshold markets
+//!
+//! For arbitrage, we compare implied probabilities between platforms.
 
 use std::collections::HashMap;
 
@@ -26,54 +28,51 @@ pub struct MarketMatcher {
 }
 
 impl MarketMatcher {
-    /// Create a new market matcher with verified active market pairs.
-    /// 
-    /// Note: These are "approximate" matches due to different granularities:
-    /// - Polymarket: $2,000 increments
-    /// - Kalshi: $250-$500 increments
+    /// Create a new market matcher with active market pairs.
+    ///
+    /// Updated: January 5, 2026
+    /// Markets are "Bitcoin Up or Down" hourly resolution markets.
     pub fn new() -> Self {
         let mut matches = HashMap::new();
 
         // ---------------------------------------------------------------------
-        // BITCOIN PRICE MARKETS - January 4, 2026
-        // Polymarket resolution: 12:00 PM ET (Binance 1-minute candle)
-        // Kalshi resolution: 5:00 PM EST (CF Benchmarks RTI average)
+        // BITCOIN UP OR DOWN - January 5, 2026 (Hourly Markets)
+        // These resolve at the end of each hour based on Binance BTC/USDT
+        // clobTokenId is for the "Up" (YES) outcome
         // ---------------------------------------------------------------------
 
-        // 1. Bitcoin Above $98,000 (closest match to Kalshi $98,250)
-        // Polymarket: "Bitcoin above 98,000 on January 4?" - resolves 12pm ET
-        // Kalshi: "KXBTCD-26JAN0417-T98249.99" - resolves 5pm EST
-        let btc_98k = MatchedMarket {
-            name: "BTC Above ~$98k (Jan 4)".to_string(),
-            // YES clobTokenId for "Bitcoin above 98,000 on January 4?"
-            polymarket_id: "112281706743127882541430899708477543478860369766089047798338771401447150750990".to_string(),
-            kalshi_ticker: "KXBTCD-26JAN0417-T98249.99".to_string(),
+        // 1. Bitcoin Up or Down - 3PM ET (resolves 4PM ET)
+        let btc_3pm = MatchedMarket {
+            name: "BTC Up/Down 3PM ET (Jan 5)".to_string(),
+            polymarket_id: "19624172204178867270299534492363892804243098884958805437588142691739650752818".to_string(),
+            // Using 5pm EST Kalshi market for comparison
+            kalshi_ticker: "KXBTCD-26JAN0517-T94249.99".to_string(),
         };
-        matches.insert(btc_98k.polymarket_id.clone(), btc_98k);
+        matches.insert(btc_3pm.polymarket_id.clone(), btc_3pm);
 
-        // 2. Bitcoin Above $96,000 (closest match to Kalshi $97,750)
-        // Polymarket: "Bitcoin above 96,000 on January 4?" - resolves 12pm ET
-        // Kalshi: "KXBTCD-26JAN0417-T97749.99" - resolves 5pm EST
-        let btc_96k = MatchedMarket {
-            name: "BTC Above ~$96k-$97.75k (Jan 4)".to_string(),
-            // YES clobTokenId for "Bitcoin above 96,000 on January 4?"
-            polymarket_id: "41888813420182332299310344861513525293633211919331684128442282650474680953091".to_string(),
-            kalshi_ticker: "KXBTCD-26JAN0417-T97749.99".to_string(),
+        // 2. Bitcoin Up or Down - 5PM ET (resolves 6PM ET)
+        let btc_5pm = MatchedMarket {
+            name: "BTC Up/Down 5PM ET (Jan 5)".to_string(),
+            polymarket_id: "64331692285920497167043827511734089895966734302171910924386164102158120192515".to_string(),
+            kalshi_ticker: "KXBTCD-26JAN0517-T94249.99".to_string(),
         };
-        matches.insert(btc_96k.polymarket_id.clone(), btc_96k);
+        matches.insert(btc_5pm.polymarket_id.clone(), btc_5pm);
 
-        // 3. Additional Kalshi market for spread analysis
-        // Kalshi: "KXBTCD-26JAN0417-T98749.99" ($98,750 threshold)
-        // No direct Polymarket equivalent - using $98k for comparison
-        let btc_98_75k = MatchedMarket {
-            name: "BTC Above $98,750 (Kalshi only)".to_string(),
-            // Reusing $98k Polymarket ID for comparison
-            polymarket_id: "112281706743127882541430899708477543478860369766089047798338771401447150750990".to_string(),
-            kalshi_ticker: "KXBTCD-26JAN0417-T98749.99".to_string(),
+        // 3. Bitcoin Up or Down - 8PM ET (resolves 9PM ET)
+        let btc_8pm = MatchedMarket {
+            name: "BTC Up/Down 8PM ET (Jan 5)".to_string(),
+            polymarket_id: "63501553680907011398404492052704199683744111807521098612450074584385523964810".to_string(),
+            kalshi_ticker: "KXBTCD-26JAN0517-T94249.99".to_string(),
         };
-        // Note: Don't insert duplicate - just for reference
-        // matches.insert(btc_98_75k.polymarket_id.clone(), btc_98_75k);
-        let _ = btc_98_75k; // suppress warning
+        matches.insert(btc_8pm.polymarket_id.clone(), btc_8pm);
+
+        // 4. Bitcoin Up or Down - 11PM ET (resolves 12AM ET next day)
+        let btc_11pm = MatchedMarket {
+            name: "BTC Up/Down 11PM ET (Jan 5)".to_string(),
+            polymarket_id: "11322761507222986303977493587384536158539335638025200075639546051812934376948".to_string(),
+            kalshi_ticker: "KXBTCD-26JAN0517-T94249.99".to_string(),
+        };
+        matches.insert(btc_11pm.polymarket_id.clone(), btc_11pm);
 
         Self { matches }
     }
