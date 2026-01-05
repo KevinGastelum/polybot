@@ -141,4 +141,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**Built with ❤️ and Rust**
+**Built by Kevin ❤️ with Rust**
